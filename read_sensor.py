@@ -30,14 +30,24 @@ except:
 relay1_ON  = [0, 6, 0, 0, 0, 255, 200, 91]
 relay1_OFF = [0, 6, 0, 0, 0, 0, 136, 27]
 
+relay2_ON  = [15, 6, 0, 0, 0, 255, 200, 164]
+relay2_OFF = [15, 6, 0, 0, 0, 0, 136, 228]
+
 def setDevice1(state):
     if state == True:
         ser.write(relay1_ON)
     else:
         ser.write(relay1_OFF)
     time.sleep(1)
-    print(serial_read_data(ser))
+    print("device1: " + serial_read_data(ser))
 
+def setDevice2(state):
+    if state == True:
+        ser.write(relay2_ON)
+    else:
+        ser.write(relay2_OFF)
+    time.sleep(1)
+    print("device2: " + serial_read_data(ser))
 
 def serial_read_data(ser):
     bytesToRead = ser.inWaiting()
@@ -62,10 +72,14 @@ counter = 0
 while True:
     if counter >= 5:
         setDevice1(True)
+        setDevice2(False)
         print("Relay1 : ON")
+        print("Relay2 : OFF")
     else:
         setDevice1(False)
-        print("Relay2 : OFF")
+        setDevice2(True)
+        print("Relay1 : OFF")
+        print("Relay2 : ON")
     if counter == 10:
         counter = 0
     counter += 1
