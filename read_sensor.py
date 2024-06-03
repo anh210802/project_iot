@@ -39,7 +39,7 @@ def setDevice1(state):
     else:
         ser.write(relay1_OFF)
     time.sleep(1)
-    print("device1: " + serial_read_data(ser))
+    print(f"device1: {serial_read_data(ser)}")
 
 def setDevice2(state):
     if state == True:
@@ -47,7 +47,7 @@ def setDevice2(state):
     else:
         ser.write(relay2_OFF)
     time.sleep(1)
-    print("device2: " + serial_read_data(ser))
+    print(f"device2: {serial_read_data(ser)}")
 
 def serial_read_data(ser):
     bytesToRead = ser.inWaiting()
