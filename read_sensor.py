@@ -41,44 +41,32 @@ def setDevice1(state):
 
 def serial_read_data(ser):
     bytesToRead = ser.inWaiting()
-    if bytesToRead > 0:
-        out = ser.read(bytesToRead)
-        data_array = [b for b in out]
-        print(data_array)
-        if len(data_array) >= 7:
-            array_size = len(data_array)
-            value = data_array[array_size - 4] * 256 + data_array[array_size - 3]
-            return value
-        else:
-            return -1
-    return 0
+    out = ser.read(bytesToRead)
+    return out
 
-soil_temperature =[1, 3, 0, 6, 0, 1, 100, 11]
-def readTemperature():
-    serial_read_data(ser)
-    ser.write(soil_temperature)
-    time.sleep(1)
-    return serial_read_data(ser)
+# soil_temperature =[1, 3, 0, 6, 0, 1, 100, 11]
+# def readTemperature():
+#     serial_read_data(ser)
+#     ser.write(soil_temperature)
+#     time.sleep(1)
+#     return serial_read_data(ser)
 
-soil_moisture = [1, 3, 0, 7, 0, 1, 53, 203]
-def readMoisture():
-    serial_read_data(ser)
-    ser.write(soil_moisture)
-    time.sleep(1)
-    return serial_read_data(ser)
+# soil_moisture = [1, 3, 0, 7, 0, 1, 53, 203]
+# def readMoisture():
+#     serial_read_data(ser)
+#     ser.write(soil_moisture)
+#     time.sleep(1)
+#     return serial_read_data(ser)
 
 counter = 0
 while True:
-    if counter >= 10:
+    if counter >= 5:
         setDevice1(True)
         print("Relay1 : ON")
     else:
         setDevice1(False)
         print("Relay2 : OFF")
-    if counter == 20:
+    if counter == 10:
         counter = 0
     counter += 1
-    print(readMoisture())
-    time.sleep(0.5)
-    print(readTemperature())
-    time.sleep(0.5)
+    time.sleep(1)
