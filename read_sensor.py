@@ -8,11 +8,11 @@ ser = serial.Serial("/dev/ttyUSB0", 115200)
 print("OK")
 count = 0
 
-def setDevice1(self, state):
+def setDevice1(state):
     if state == True:
-        self.ser.write(bytearray(relay1_ON))
+        ser.write(bytearray(relay1_ON))
     else:
-        self.ser.write(bytearray(relay1_OFF))
+        ser.write(bytearray(relay1_OFF))
 
 while True:
     count += 1
@@ -22,3 +22,4 @@ while True:
         setDevice1(False)
         count = 0
     print(ser.read)
+    time.sleep(1)
